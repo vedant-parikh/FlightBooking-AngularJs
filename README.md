@@ -1,5 +1,4 @@
 # Angular Booking Application — Demo Application for Angular JS
-----------------------------------------------------------------
 ## Created by Vedant Parikh
 
 This project is a sample application demonstrating a more fully developed realistic single page
@@ -28,9 +27,12 @@ There are 5 sections on the Flight Booking Page
 - Payment
 - Confirm Booking
 
-On the passenger section:
-- Existing Passenger can be edited
-- Existing Passenger can be deleted
-- New Passenger can be added
+In this simple application:
+- Existing Passenger can be edited.
+- Existing Passenger can be deleted.
+- New Passenger can be added.
+- Flight can be booked.
+- Flight can be cancelled.
 
-Data in all other sections are faked. 
+Data in all other sections are faked.
+
