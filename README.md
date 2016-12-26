@@ -6,7 +6,7 @@ angular application.
 
 ### Server
 
-The node server is provided. From the command line run "npm install" and then "server.sh" for linux.
+The node server is provided. From the bash, run "npm install" and then "server.sh" for linux.
 
 ### Running the application
 
