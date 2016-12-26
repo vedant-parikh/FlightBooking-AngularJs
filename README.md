@@ -1,5 +1,5 @@
-# Angular Booking Application — Demo Application for Angular JS
-## Created by Vedant Parikh
+# Flight Booking Application — Demo Application created using Angular JS
+## Author: Vedant Parikh
 
 This project is a sample application demonstrating a more fully developed realistic single page
 angular application.
