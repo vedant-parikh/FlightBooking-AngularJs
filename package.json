@@ -1,0 +1,18 @@
+{
+  "name": "BookingApp",
+  "version": "1.0.0",
+  "description": "Single page angular application for Flight booking.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vedant Parikh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "express": "^4.13.0"
+  }
+}

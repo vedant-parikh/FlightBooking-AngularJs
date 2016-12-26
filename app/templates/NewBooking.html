@@ -1,0 +1,341 @@
+<ol class="breadcrumb booking-breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Flight</a></li>
+    <li class="breadcrumb-item active">Booking</li>
+</ol>
+<h3>Flight Booking</h3>
+<hr/>
+<!-- Adding a passenger -->
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="flight-section col-md-12 col-sm-12 col-xs-12 padding-lr-10 padding-tb-15">
+            <div class="col-lg-4 hidden-md hidden-sm hidden-xs">
+                <img class="padding-tb-10" ng-src="{{flight.imageUrl}}" alt="Flight Image"/>
+            </div>
+            <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12">
+                <h4 class="flight-section-heading center-text">{{ flight.origin + ' - ' + flight.destination}}</h4>
+                <h5 class="center-text">{{flight.oneWayOrTwoWay}}</h5>
+                <h6 class="center-text">{{flight.airline}}</h6>
+            </div>
+            <div class="col-lg-12">
+                <h4 class="details-section-heading">DETAILS:</h4>
+                <hr/>
+                <p>Airline: <span class="span-right"> {{ flight.airline }}</span></p>
+                <hr/>
+                <p>Departure: <span class="span-right"> {{ flight.departure }}</span></p>
+                <hr/>
+                <p>Arrival: <span class="span-right"> {{ flight.arrival }}</span></p>
+                <hr/>
+                <p>Flight Type: <span class="span-right"> {{ flight.FlightType }}</span></p>
+                <hr/>
+                <p>Price: <span class="span-right"> {{ flight.price }}</span></p>
+                <hr/>
+                <p>Taxes And Fees: <span class="span-right"> {{ flight.TaxesAndFees }}</span></p>
+                <hr/>
+                <p>Total Price: <span class="span-right"> {{ flight.TotalPrice }}</span></p>
+            </div>
+        </div>
+        <div class="contact-section col-md-12 hidden-sm hidden-xs">
+            <div class="col-lg-12">
+                <h4 class="details-section-heading">Need Help?</h4>
+                <h5>WE WOULD BE HAPPY TO HELP YOU!</h5>
+                <h5><i class="fa fa-phone" aria-hidden="true"></i> +1-234-567-8901</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <div class="booking-section col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12">
+                <h4 class="booking-section-heading">PASSENGER INFORMATION</h4>
+                <div ng-repeat="passenger in passengers">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-link"
+                                    ng-click="setEditedPassenger(passenger);startEditing();"><i
+                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                            </button>
+                            <button type="button" ng-click="deletePassenger(passenger);"
+                                    class="close hidden-lg margin-right-15">&times;</button>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="col-lg-6">
+                                <p>Name: <span
+                                        class="span-right">{{passenger.firstName + ' ' + passenger.lastName}}</span></p>
+                                <p>E-Mail: <span class="span-right">{{passenger.email}}</span></p>
+                                <p>Gender: <span class="span-right">{{passenger.gender}}</span></p>
+                                <p>Birthdate: <span class="span-right">{{passenger.birthDate}}</span></p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p>Country: <span class="span-right">{{passenger.country}}</span></p>
+                                <p>Citizenship: <span class="span-right">{{passenger.citizenship}}</span></p>
+                                <p>Travel Document: <span class="span-right">{{passenger.travelid}}</span></p>
+                                <p>Document Expiry Date: <span class="span-right">{{passenger.expirydate}}</span></p>
+                            </div>
+                            <div class="col-lg-12">
+                                <hr/>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 hidden-md hidden-sm hidden-xs">
+                            <button type="button" ng-click="deletePassenger(passenger);"
+                                    class="close  margin-right-15">&times;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="shouldShowCreating()">
+                <div class="col-lg-12 col-md-12">
+                    <button type="button" class="btn btn-link" ng-click="startCreating();">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add Passenger
+                    </button>
+                    <form name="newBookingForm" class="new-booking-form" ng-if="isCreating"
+                          ng-submit="createPassenger(passenger)">
+                        <h4 class="booking-section-heading">Passenger Information</h4>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="booking-form-label" for="firstName">First Name:</label>
+                                <input type="text" class="form-control booking-form-input" id="firstName" required
+                                       ng-model="passenger.firstName">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="lastName" class="booking-form-label">Last Name:</label>
+                                <input id="lastName" class="form-control booking-form-input" type="text" required
+                                       ng-model="passenger.lastName">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="email" class="booking-form-label">Email Address:</label>
+                                <input id="email" class="form-control booking-form-input" type="email" required
+                                       ng-model="passenger.email">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="confirmEmail" class="booking-form-label">Confirm Email Address:</label>
+                                <input id="confirmEmail" class="form-control booking-form-input" type="email" required
+                                       ng-model="passenger.confirmEmail">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="Gender" class="booking-form-label">Male/Female:</label>
+                                <select id="Gender" class="form-control booking-form-input" required
+                                        ng-model="passenger.gender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="birthDate" class="booking-form-label">Date of Birth:</label>
+                                <input id="birthDate" class="form-control booking-form-input" type="text" required
+                                       ng-pattern="/\d\d/\d\d/\d\d\d\d/" ng-model="passenger.birthDate"
+                                       placeholder="format(mm/dd/yyyy)">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="country" class="booking-form-label">Country:</label>
+                                <input id="country" class="form-control booking-form-input" type="text" required
+                                       ng-model="passenger.country">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="citizenship" class="booking-form-label">Citizenship:</label>
+                                <input id="citizenship" class="form-control booking-form-input" type="text" required
+                                       ng-model="passenger.citizenship">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="travel-id" class="booking-form-label">Travel Id:</label>
+                                <input id="travel-id" class="form-control booking-form-input" type="text" required
+                                       ng-model="passenger.travelid">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="expiry-date" class="booking-form-label">Expiry Date:</label>
+                                <input id="expiry-date" class="form-control booking-form-input" type="text" required
+                                       ng-pattern="/\d\d/\d\d/\d\d\d\d/" ng-model="passenger.expirydate"
+                                       placeholder="format(mm/dd/yyyy)">
+                            </div>
+                        </div>
+                        <hr/>
+                        <button type="submit" ng-disabled="newBookingForm.$invalid"
+                                class="btn btn-default no-border-radius margin-left-15">Save
+                        </button>
+                        <button ng-click="cancelCreating()" class="btn btn-default no-border-radius">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Editing a passenger -->
+            <div class="col-lg-12 col-md-12">
+                <div ng-if="shouldShowEditing()">
+                    <h4 class="booking-section-heading">Editing Passenger:</h4>
+                    <form name="editBookingForm" class="edit-booking-form" ng-if="isEditing"
+                          ng-submit="updatePassenger(editedPassenger)">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="booking-form-label">First Name:</label>
+                                <input type="text" class="form-control booking-form-input" required
+                                       ng-model="editedPassenger.firstName">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="booking-form-label">Last Name:</label>
+                                <input class="form-control booking-form-input" type="text" required
+                                       ng-model="editedPassenger.lastName">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="booking-form-label">Email Address:</label>
+                                <input class="form-control booking-form-input" type="email" required
+                                       ng-model="editedPassenger.email">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="booking-form-label">Confirm Email Address:</label>
+                                <input class="form-control booking-form-input" type="email" required
+                                       ng-model="editedPassenger.confirmEmail">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label class="booking-form-label">Male/Female:</label>
+                                <select class="form-control booking-form-input" required
+                                        ng-model="editedPassenger.gender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="booking-form-label">Date of Birth:</label>
+                                <input class="form-control booking-form-input" type="text" required
+                                       ng-pattern="/\d\d/\d\d/\d\d\d\d/" ng-model="editedPassenger.birthDate"
+                                       placeholder="format(mm/dd/yyyy)">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="booking-form-label">Country:</label>
+                                <input class="form-control booking-form-input" type="text" required
+                                       ng-model="editedPassenger.country">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="booking-form-label">Citizenship:</label>
+                                <input class="form-control booking-form-input" type="text" required
+                                       ng-model="editedPassenger.citizenship">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="booking-form-label">Travel Id:</label>
+                                <input class="form-control booking-form-input" type="text" required
+                                       ng-model="editedPassenger.travelid">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="booking-form-label">Expiry Date:</label>
+                                <input class="form-control booking-form-input" type="text" required
+                                       ng-pattern="/\d\d/\d\d/\d\d\d\d/" ng-model="editedPassenger.expirydate"
+                                       placeholder="format(mm/dd/yyyy)">
+                            </div>
+                        </div>
+                        <button type="submit" ng-disabled="editBookingForm.$invalid" class="btn btn-primary">Save
+                        </button>
+                        <button ng-click="cancelEditing()" class="btn btn-default">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="booking-section col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12">
+                <h4 class="booking-section-heading">CUSTOMER INFORMATION</h4>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-link"><i class="fa fa-pencil-square-o"
+                                                                      aria-hidden="true"></i></span>
+                        </button>
+                        <button type="button" ng-click="deletePassenger(passenger);"
+                                class="close hidden-lg margin-right-15">&times;</button>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="col-lg-6">
+                            <p>Name: <span class="span-right">{{customer.firstName + ' ' + customer.lastName}}</span>
+                            </p>
+                            <p>E-Mail: <span class="span-right">{{customer.email}}</span></p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>Country: <span class="span-right">{{customer.country}}</span></p>
+                            <p>Phone Number: <span class="span-right">{{customer.phone}}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 hidden-md hidden-sm hidden-xs">
+                        <button type="button" class="close  margin-right-15">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="booking-section col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12">
+                <h4 class="booking-section-heading">PAYMENT INFORMATION</h4>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-link"><i class="fa fa-pencil-square-o"
+                                                                      aria-hidden="true"></i></span>
+                        </button>
+                        <button type="button" ng-click="deletePassenger(passenger);"
+                                class="close hidden-lg margin-right-15">&times;</button>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="col-lg-6">
+                            <p>Card Number: <span class="span-right">{{payment.card_number}}</span></p>
+                            <p>Expiry Date: <span class="span-right">{{payment.expiry_date}}</span></p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p>Card Holder Name: <span class="span-right">{{payment.card_holder_name}}</span></p>
+                            <p>Identification Number: <span class="span-right">{{payment.identification_number}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 hidden-md hidden-sm hidden-xs">
+                        <button type="button" class="close  margin-right-15">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="booking-section col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12">
+                <h4 class="booking-section-heading">CONFIRM BOOKING</h4>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="padding-lr-10">Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                            an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <hr class="padding-lr-10"/>
+                        <button class="btn btn-default btn-green no-border-radius" ng-click="confirmBooking();"
+                                type="submit">Confirm Booking
+                        </button>
+                        <button class="btn btn-default no-border-radius" ng-click="cancelBooking();" type="submit">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
